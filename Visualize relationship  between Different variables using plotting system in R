@@ -1,0 +1,22 @@
+###Visualize relationship  between Different variables using plotting system in R
+##1. Using the state.x77 and state.region datasets, visualize the relationship between Income and illiteracy.
+data <- state
+df  <- data.frame(state.x77)
+df$region <- state.region
+plot(df$Income ~ df$Illiteracy, data = df, col = df$region, pch = 19,
+     xlab = "Illiteracy",  ylab = "Income", main = "Income vs Illiteracy")
+
+##2. Visualize the relationship between Population, region and life expectancy (Life.Exp)
+library(ggplot2)
+data(state.x77)
+data(state)
+state$region <- state.region
+state$region <- as.factor(state$region)
+ggplot(state, aes(x=Population, y=Life.Exp)) + geom_point(aes(color=region)) + labs(title="Relationship between Population, Region and Life Expectancy", x="Population", y="Life Expectancy")
+
+
+##3. Export the charts to a pdf file.
+pdf("charts.pdf")
+ggplot(state, aes(x = "Income", y = "Illiteracy")) + geom_point(aes(color= region)) + labs(title= "Relationship between Income and Illiteracy", x = "Income", y = "Illiteracy")
+ggplot(state, aes(x = "Population", y = "Life.Exp")) + geom_point(aes(color= region)) + labs(title = "Relationship between Population, Region and Life Expectancy", x = "Population", y="Life Expectancy")
+dev.off()
