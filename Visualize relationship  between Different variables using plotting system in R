@@ -20,3 +20,23 @@ pdf("charts.pdf")
 ggplot(state, aes(x = "Income", y = "Illiteracy")) + geom_point(aes(color= region)) + labs(title= "Relationship between Income and Illiteracy", x = "Income", y = "Illiteracy")
 ggplot(state, aes(x = "Population", y = "Life.Exp")) + geom_point(aes(color= region)) + labs(title = "Relationship between Population, Region and Life Expectancy", x = "Population", y="Life Expectancy")
 dev.off()
+
+### 1. Using the visualize the relationship between height and weight from the women dataset.
+##3 Women dataset
+dataset(women)
+library(lattice)
+xyplot(height ~ weight, data = women)
+##2. Is there a strong correlation between the two quantities? Compute correlation coefficient and fit a linear regression model
+with(women, plot(height, weight, main = "height and weight"))
+model <- lm(height ~ weight, women)
+abline(model, lwd = 2, col = "red", lty = 5)
+##3. Export the charts and results to a pdf file.
+pdf("charts.pdf")
+
+###1. Using the longley dataset, plot the relationship between Umployed and GNP.
+## longley dataset
+head(longley)
+library(ggplot2)
+qplot(Unemployed, GNP, data = longley)
+##2. As a scatter plot, plot out Unemployed values as blue dots and Employed values as green dots. 
+qplot(Unemployed, GNP, data = longley, Unemployed = "blue", Employed = "Green") 
